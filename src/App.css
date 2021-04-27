@@ -1,24 +1,168 @@
+body {
+  background-image: url(./img/3156605.jpg);
+  background-size: cover;
+  color: white;
+  font-family: 'Space Mono', monospace;
+  text-align: center;
+  max-width: 60%;
+  margin: 0 auto !important;
+}
+
 .App {
   text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
+  margin-top: 5vh;
+}
+
+.player-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-started {
+  margin: 10vh;
+}
+
+.user-input {
+  margin-bottom: 2vh;
+  font-family: 'Space Mono', monospace;
+  border-radius: 5%;
+}
+
+.header-player {
+  background-color: rgba(5, 4, 4, 0.658);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10vh;
+}
+
+.transition-button {
+  height: 8vh;
+  width: 12vw;
+  background-color: black;
+  color: white;
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  border-radius: 20%;
+  margin-top: 8vh;
+}
+
+.transition-button:hover {
+  background-color: rgb(14, 12, 12);
+}
+
+.transition-button:disabled {
+  background-color: rgb(46, 44, 44);
+}
+
+@media (max-width: 670px) {
+  .transition-button {
+    width: 15vw;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 440px) {
+  .transition-button {
+    width: 17vw;
+    font-size: 0.7rem;
+  }
+}
+
+.answers-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.answ {
+  background-color: rgba(44, 42, 42, 0.747);
+  color: white;
+  font-family: 'Space Mono', monospace;
+  border-radius: 10%;
+  padding: 0.5vh;
+  margin: 1vh;
 }
 
 .red-border {
-  border: 3px solid rgb(255, 0, 0);
+  border: 3px solid rgb(159, 57, 226);
+  background-color: rgba(44, 42, 42, 0.747);
+  color: white;
+  font-family: 'Space Mono', monospace;
+  border-radius: 10%;
+  padding: 0.5vh;
+  margin: 1vh;
 }
 
 .green-border {
-  border: 3px solid rgb(6, 240, 15);
+  border: 3px solid rgb(80, 110, 209);
+  background-color: rgba(44, 42, 42, 0.747);
+  color: white;
+  font-family: 'Space Mono', monospace;
+  border-radius: 10%;
+  padding: 0.5vh;
+  margin: 1vh;
+}
+
+.img-gravatar {
+  border-radius: 50%;
+}
+
+.answ:hover {
+  background-color: rgba(44, 42, 42, 0.596);
+}
+
+@font-face {
+  font-family: DigitalFontNumber;
+  src: url(./img/DigitalNumbers-Regular.ttf);
+}
+
+.timer {
+  font-family: DigitalFontNumber;
+  margin-top: 5vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: shake infinite 0.82s cubic-bezier(.36,.07,.19,.97) both;
   }
+}
+
+.message {
+  background-color: rgba(8, 8, 8, 0.445);
+  padding: 3vh;
+}
+.buttons-feedback {
+  display: flex;
+  justify-content: space-around;
+}
+.title-rank {
+  margin-bottom: 10vh;
+}
+
+.each-rank {
+  display: flex;
+  background-color: rgba(8, 8, 8, 0.445);
+}
+
+.game {
+  background-color: rgba(8, 8, 8, 0.445);
+  padding: 3vh;
+}
+
+.question {
+  margin: 5vh;
+}
+
+.gravatar {
+  max-height: 9vh;
 }
 
 .App-header {

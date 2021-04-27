@@ -8,6 +8,7 @@ export const ANSWERED = 'ANSWERED';
 export const CLEAR = 'CLEAR';
 export const GET_SCORE = 'GET_SCORE';
 export const CLEAR_SCORE = 'CLEAR_SCORE';
+export const SET_TIME = 'SET_TIME';
 
 export function dataPlayerAction(name, email) {
   return {
@@ -111,3 +112,10 @@ export function clearPlayerAction(name, email, score, assertions) {
     assertions,
   };
 }
+
+// export function timerAction(count) {
+//   return {
+//     type: SET_TIME,
+//     count,
+//   };
+// }

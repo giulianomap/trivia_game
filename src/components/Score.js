@@ -38,30 +38,28 @@ class Score extends React.Component {
     return (
       <div>
         <Header />
-        <section>
-          <h3>Feedback message:</h3>
-          {(assertions >= 3) && <p data-testid="feedback-text">Mandou bem!</p>}
-          {(assertions < 3) && <p data-testid="feedback-text">Podia ser melhor...</p>}
-        </section>
-        <section>
-          <h3>See your results:</h3>
-          <p>Your total score is <span data-testid="feedback-total-score">{score}</span> points</p>
+        <section className="message">
+          <h2>Feedback message:</h2>
+          {(assertions >= 3) && <p data-testid="feedback-text">You rock!</p>}
+          {(assertions < 3) && <p data-testid="feedback-text">Could be better...</p>}
+          <h2>See your results:</h2>
+          <p>Your total score is <span data-testid="feedback-total-score">{score}</span> points.</p>
           <p>
-            You got
-            <span data-testid="feedback-total-question">{assertions}</span>
-            answers right.
+            You got <span data-testid="feedback-total-question">{assertions}</span> answers right.
           </p>
         </section>
+        <section className="buttons-feedback">
         <Link to="/">
-          <button type="button" data-testid="btn-play-again" onClick={() => clearPlayer('', '', 0, 0)}>
-            Jogar novamente
+          <button className="transition-button" type="button" data-testid="btn-play-again" onClick={() => clearPlayer('', '', 0, 0)}>
+            Play again
           </button>
         </Link>
         <Link to="/ranking">
-          <button type="button" data-testid="btn-ranking">
-            Ver ranking
+          <button className="transition-button" type="button" data-testid="btn-ranking">
+            See ranking
           </button>
         </Link>
+        </section>
       </div>
     );
   }

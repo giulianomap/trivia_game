@@ -3,7 +3,8 @@ import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { dataPlayerAction, fetchTokenThunk, fetchTriviaThunk } from '../actions';
-import LinkSettings from './LinkSettings';
+// import LinkSettings from './LinkSettings';
+import logo from '../img/trivia.png';
 
 class Player extends React.Component {
   constructor(props) {
@@ -47,31 +48,36 @@ class Player extends React.Component {
   render() {
     const { name, email, goToGame } = this.state;
     return (
-      <div>
+      <div className="player-page">
         {goToGame && <Redirect to="/game" />}
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1 className="title-started">Get started!</h1>
         <input
+          className="user-input"
           type="text"
-          placeholder="name"
+          placeholder="Nickname"
           data-testid="input-player-name"
           name="name"
           onChange={this.handleChange}
         />
         <input
+          className="user-input"
           type="email"
-          placeholder="email"
+          placeholder="Email"
           data-testid="input-gravatar-email"
           name="email"
           onChange={this.handleChange}
-        />
+          />
         <button
+          className="transition-button"
           type="button"
           data-testid="btn-play"
           disabled={!(name && email)}
           onClick={this.provokeApis}
         >
-          Jogar
+          PLAY
         </button>
-        <LinkSettings />
+        {/* <LinkSettings /> */}
       </div>
     );
   }

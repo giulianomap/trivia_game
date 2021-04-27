@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { answeredAction, playerScoreAction } from '../actions';
+import decodeEntities from '../services/decodeEntities';
 
 class Answers extends React.Component {
   constructor(props) {
     super(props);
     this.answered = this.answered.bind(this);
     this.calculateScore = this.calculateScore.bind(this);
+  }
+
+  componentDidMount() {
+    console.log('component answers did mount');
   }
 
   answered(event, timecount, level) {
@@ -26,7 +31,7 @@ class Answers extends React.Component {
       medium: 2,
       hard: 3,
     };
-    const totalScore = 10 + (timecount * difficulty[level]);
+    const totalScore = 10 + timecount * difficulty[level];
     const { getScore } = this.props;
     getScore(totalScore);
     // Now send it all to local storage
@@ -41,38 +46,69 @@ class Answers extends React.Component {
     };
     localStorage.setItem('state', JSON.stringify(newPlayerState));
   }
-
   // [HA]{Game - R6} Ajuda - (objeto difficulty + storage, Felipe Vieira, Grupo 2, PR: https://github.com/tryber/sd-05-project-trivia-react-redux-2/pull/4/files ).
   // JSON.stringify https://www.w3schools.com/js/js_json_stringify.asp
 
   render() {
-    const { correct, incorrect, answeredOne, timecount, level } = this.props;
-    return (
-      <div>
-        <p>Choose between one of these answer options:</p>
-        <button
-          data-testid="correct-answer"
-          id="correct"
-          onClick={(e) => this.answered(e, timecount, level)}
-          disabled={answeredOne}
-          className={answeredOne ? 'green-border' : null}
-        >
-          {correct}
-        </button>
-        {incorrect.map((answer, index) => (
+    const { correct, incorrect, randomAnswers, answeredOne, timecount, level } = this.props;
+    // could only randomize from 2nd question on, to wait for api to be loaded
+    if (randomAnswers.length === 0)
+      return (
+        <div className="answers-button">
           <button
-            key={answer}
-            id="incorrect"
-            className={answeredOne ? 'red-border' : null}
-            data-testid={`wrong-answer-${index}`}
+            data-testid="correct-answer"
+            id="correct"
             onClick={(e) => this.answered(e, timecount, level)}
             disabled={answeredOne}
+            className={answeredOne ? 'green-border' : 'answ'}
           >
-            {answer}
+            {decodeEntities(correct)}
           </button>
-        ))}
-      </div>
-    );
+          {incorrect.map((answer, index) => (
+            <button
+              key={answer}
+              id="incorrect"
+              className={answeredOne ? 'red-border' : 'answ'}
+              data-testid={`wrong-answer-${index}`}
+              onClick={(e) => this.answered(e, timecount, level)}
+              disabled={answeredOne}
+            >
+              {decodeEntities(answer)}
+            </button>
+          ))}
+        </div>
+      );
+    else
+      return (
+        <div className="answers-button">
+          {randomAnswers.length > 0 &&
+            randomAnswers.map((answer, index) =>
+              answer === correct ? (
+                <button
+                  key={answer}
+                  data-testid="correct-answer"
+                  id="correct"
+                  onClick={(e) => this.answered(e, timecount, level)}
+                  disabled={answeredOne}
+                  className={answeredOne ? 'green-border' : 'answ'}
+                >
+                  {decodeEntities(answer)}
+                </button>
+              ) : (
+                <button
+                  key={answer}
+                  id="incorrect"
+                  className={answeredOne ? 'red-border' : 'answ'}
+                  data-testid={`wrong-answer-${index}`}
+                  onClick={(e) => this.answered(e, timecount, level)}
+                  disabled={answeredOne}
+                >
+                  {decodeEntities(answer)}
+                </button>
+              )
+            )}
+        </div>
+      );
   }
 }
 
@@ -83,6 +119,7 @@ const mapStateToProps = (state) => ({
   assertions: state.dataPlayerReducer.assertions,
   name: state.dataPlayerReducer.name,
   email: state.dataPlayerReducer.email,
+  // timecount: state.timeReducer.count,
 });
 
 const mapDispatchToProps = (dispatch) => ({
